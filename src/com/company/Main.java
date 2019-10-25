@@ -27,6 +27,7 @@ public class Main {
             Scanner scan = new Scanner (file);
 
             int size = 26;
+
             char[] alphabet = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
             LinkedList<String> []dictionary = new LinkedList[size];
 
