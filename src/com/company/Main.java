@@ -1,6 +1,8 @@
 package com.company;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.text.Normalizer;
@@ -42,19 +44,22 @@ public class Main {
                     }
                 }
             }
-            for (LinkedList list_words : dictionary){
+            /*for (LinkedList list_words : dictionary){
                 for(int i=0; i<list_words.size(); i++){
                     // Java no sabe el tipo de variable que hay en el LinkedList dentro del Array asi q se indica con un cast --> (String)
                     String word = (String) list_words.get(i);
                     System.out.println(word);
                 }
-            }
+            }*/
             // Cerrar scanner para habilitar el acceso al file
             scan.close();
+
+            file_ordered(dictionary, path);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("File not found :(");
         }
+
     }
 
     public static LinkedList put_method (LinkedList<String>words, String s, String normal){
@@ -83,6 +88,31 @@ public class Main {
         }
 
         return words;
+
+    }
+
+    public static void file_ordered (LinkedList[] dictionary, Path path){
+        File file = new File(path + "/Resources" + "/sorteddict.txt");
+
+        //Write Content
+        FileWriter dict_ordered = null;
+        try {
+            dict_ordered = new FileWriter(file);
+            for (LinkedList list_words : dictionary){
+                for(int i=0; i<list_words.size(); i++){
+                    // Java no sabe el tipo de variable que hay en el LinkedList dentro del Array asi q se indica con un cast --> (String)
+                    String word = (String) list_words.get(i);
+                    dict_ordered.write(word + "\n");
+                }
+            }
+
+            dict_ordered.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("File not found! :(");
+        }
+
 
     }
 }
