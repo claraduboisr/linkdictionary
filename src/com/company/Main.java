@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.text.Normalizer;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -26,16 +27,21 @@ public class Main {
             // Con el Scanner podemos leer el file
             Scanner scan = new Scanner (file);
 
-            // Creo e inicializo el linked list vacio
-            LinkedList <String> sorteddict= new LinkedList();
+            int size = 26;
+            char [] alphabet = new char [size];
+            LinkedList<String> [] words = new LinkedList[size];
 
             // mientras haya una linea mas, leer esa linea
             while (scan.hasNextLine()) {
                 String s = scan.nextLine();
-                System.out.println(s);
+                String normal = Normalizer.normalize(s, Normalizer.Form.NFD);
+
+                for (int i = 0; i==size; i++){
+                    if (normal.charAt(0)==alphabet[i]){
+                        // put_method(words[i], s);
+                    }
+                }
             }
-
-
 
             scan.close();
         } catch (FileNotFoundException e) {
