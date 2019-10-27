@@ -19,7 +19,7 @@ The following project is a pair programming project done by Clara Dubois and Cla
 (one word per line) alphabetically ordered
  
 ### 2. Code Description
-#### **Structure**:
+##### Structure:
 Due to IntelliJ set up, we needed to change our Main class to non-static, that's why we created an object to execute the code in the ``` public static void main(String[] args)```
 
 ```java
@@ -57,7 +57,7 @@ while (scan.hasNextLine()) {
 scan.close();
 ```
 
-##### Algorithm
+##### Algorithm:
 The two main parts of the algorithm are:
 - Array made of the alphabet called "alphabet".
 - Array of Linked Lists (of Strings) with the same size as the alphabet named "dictionary".
@@ -97,7 +97,7 @@ dict_ordered.close();
 
 
 
-### Accept Command Line Arguments
+### Accept Command Line Arguments:
 We created a new method called ```public void process_user_input(String[] args, LinkedList<String>[] dictionary, char[] alphabet)```. All the code is inside an if/else to first make sure that there are not more than 10 inputs. If there is less or 10 inputs:
   We used a try/catch exception.
   - Try: If we can create the input into an int, then is considered as an index.
