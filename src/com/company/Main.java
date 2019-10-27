@@ -11,12 +11,23 @@ import java.util.Scanner;
 
 public class Main {
 
+
+
     public static void main(String[] args) {
+        Main app = new Main(args);
+    }
+
+    public Main(String[] args){
 
         // Entrar en Resources y encontrar el "unsorteddict.txt"
 
         // Encontrar el path hasta la carpeta linkdictionary incluida
-        Path path = FileSystems.getDefault().getPath(".").toAbsolutePath();
+        Path path = FileSystems.getDefault().getPath("").toAbsolutePath();
+
+        // Si el programa se ejecuta desde src, salir de source para encontrar el file unsorteddict.txt
+        if(path.endsWith("src")){
+            path = path.getParent();
+        }
 
         // Para encontrar (y crear) el "unsorteddict.txt"
         String file_dict_path = path + "/Resources" + "/unsorteddict.txt";
@@ -54,15 +65,62 @@ public class Main {
             // Cerrar scanner para habilitar el acceso al file
             scan.close();
 
+
             file_ordered(dictionary, path);
+
+            process_user_input(args, dictionary, alphabet);
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("File not found :(");
         }
 
+
     }
 
-    public static LinkedList put_method (LinkedList<String>words, String s, String normal){
+    public void process_user_input(String[] args, LinkedList<String>[] dictionary, char[] alphabet) {
+
+        if (args.length > 10){
+            System.out.println("Too many arguments, max number of arguments: 10");
+            
+        }
+        else{
+            for(int i=0; i<args.length; i++){
+                try {
+                    int position = Integer.parseInt(args[i]);
+
+                    for (int j = 0; j<alphabet.length; j++){
+                        if (position - dictionary[j].size() < 0){
+                            System.out.println(dictionary[j].get(position));
+                        }
+                        else{
+                            position = position-dictionary[j].size();
+                        }
+                    }
+
+                    // if it gets to "catch" it means that it is a String
+                } catch(NumberFormatException e) {
+
+                    for (int j = 0; j<alphabet.length; j++){
+                        if (Character.toLowerCase(args[i].charAt(0))== alphabet[j]){
+                            System.out.println((dictionary[i].indexOf(args[i])));
+                        }
+                        if (j == 25){
+                            System.out.println("-1");
+                        }
+                    }
+                    return;
+                } catch(NullPointerException e) {
+                    return;
+                }
+            }
+        }
+
+
+
+    }
+
+    public LinkedList put_method (LinkedList<String>words, String s, String normal){
 
         if (words == null){
             words = new LinkedList<>();
@@ -91,7 +149,7 @@ public class Main {
 
     }
 
-    public static void file_ordered (LinkedList[] dictionary, Path path){
+    public void file_ordered (LinkedList[] dictionary, Path path){
         File file = new File(path + "/Resources" + "/sorteddict.txt");
 
         //Write Content
@@ -115,5 +173,6 @@ public class Main {
 
 
     }
+
 }
 
