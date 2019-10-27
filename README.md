@@ -6,6 +6,8 @@ The following project is a pair programming project done by Clara Dubois and Cla
 ### 2. Code Description
 
 
+![background](https://s7d5.scene7.com/is/image/horizonhobby/HHEU-airme-info-960x100?$Default$)
+
 ### 1. General information
  * **Instructions**: Create a JAVA project to manage a dictionary built using _Linked lists_.
  * **Functionalities required**: 
