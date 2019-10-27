@@ -57,11 +57,11 @@ scan.close();
 
 ##### Algorithm
 The two main parts of the algorithm are:
-- Array made of the alphabet called "alphabet"
-- Array of Linked Lists (of Strings) with the same size as the alphabet named "dictionary"
+- Array made of the alphabet called "alphabet".
+- Array of Linked Lists (of Strings) with the same size as the alphabet named "dictionary".
 
 ###### *How does it sort?*
-We decided to create an array of linked lists, where in each linked list the words that start with the same letter are grouped. The reason behind this is for being able to sort in parallel and saving a lot of time (indeed, it can sort all the 99171 words in aprox. 8 seconds)
+We decided to create an array of linked lists, where in each linked list the words that start with the same letter are grouped. The reason behind this is for being able to sort in parallel and saving a lot of time (indeed, it can sort all the 99171 words in aprox. 8 seconds).
 
 To have a clearer and more organized structure of the code, we created a specific method for inserting each word in the proper alphabetical order:
   ```java
@@ -98,7 +98,7 @@ dict_ordered.close();
 ### Accept Command Line Arguments
 We created a new method called ```public void process_user_input(String[] args, LinkedList<String>[] dictionary, char[] alphabet)```. All the code is inside an if/else to first make sure that there are not more than 10 inputs. If there is less or 10inputs:
   We used a try/catch exception.
-  - Try: If we can create the input into an int, then is considered as an index
+  - Try: If we can create the input into an int, then is considered as an index.
 
    ```java
          
