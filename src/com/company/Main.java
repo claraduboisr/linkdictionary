@@ -82,34 +82,54 @@ public class Main {
 
         if (args.length > 10){
             System.out.println("Too many arguments, max number of arguments: 10");
-            
+
         }
         else{
             for(int i=0; i<args.length; i++){
                 try {
-                    int position = Integer.parseInt(args[i]);
+                    int position = Integer.parseInt(args[i]) - 1;
 
-                    for (int j = 0; j<alphabet.length; j++){
-                        if (position - dictionary[j].size() < 0){
-                            System.out.println(dictionary[j].get(position));
-                        }
-                        else{
-                            position = position-dictionary[j].size();
+                    if(position < 0){
+                        System.out.println("Please introduce a postive number.");
+                    }else{
+                        for (int j = 0; j<alphabet.length; j++){
+                            if (position - dictionary[j].size() < 0){
+                                System.out.println(dictionary[j].get(position));
+                                break;
+                            }
+                            else{
+                                position = position-dictionary[j].size();
+                            }
+                            if(j==25){
+                                System.out.println("Index not in dictionary");
+                            }
                         }
                     }
+
+
 
                     // if it gets to "catch" it means that it is a String
                 } catch(NumberFormatException e) {
 
                     for (int j = 0; j<alphabet.length; j++){
                         if (Character.toLowerCase(args[i].charAt(0))== alphabet[j]){
-                            System.out.println((dictionary[i].indexOf(args[i])));
+                            int position = dictionary[j].indexOf(args[i]);
+                            if (position == -1){
+                                System.out.println(position);
+                                break;
+                            }else{
+                                position++;
+                                for (int g=j-1; g>=0; g--){
+                                    position += dictionary[g].size();
+                                }
+                                System.out.println(position);
+                                break;
+                            }
                         }
                         if (j == 25){
                             System.out.println("-1");
                         }
                     }
-                    return;
                 } catch(NullPointerException e) {
                     return;
                 }
