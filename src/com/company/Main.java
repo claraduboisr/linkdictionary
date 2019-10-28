@@ -12,11 +12,20 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        double startTime = System.currentTimeMillis();
         Main app = new Main(args);
+
+        double endTime = System.currentTimeMillis();
+
+        double timeElapsed = endTime - startTime;
+
+        System.out.println("Execution time in seconds  : " + timeElapsed/1000);
     }
 
-    public Main(String[] args){
 
+
+
+    public Main(String[] args){
         // Entrar en Resources y encontrar el "unsorteddict.txt"
 
         // Encontrar el path hasta la carpeta linkdictionary incluida
@@ -28,7 +37,7 @@ public class Main {
         }
 
         // Para encontrar (y crear) el "unsorteddict.txt"
-        String file_dict_path = path + "/Resources" + "/unsorteddict.txt";
+        String file_dict_path = path + "/Resources" + "/unsortedDictTest.txt";
 
         File file = new File(file_dict_path);
 
@@ -59,11 +68,13 @@ public class Main {
             file_ordered(dictionary, path);
 
             process_user_input(args, dictionary, alphabet);
+            // System.out.println(time_end - time_start);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("File not found :(");
         }
+
 
     }
 
@@ -146,6 +157,7 @@ public class Main {
             }
             words.add(position, s);
         }
+        int time_end = (int) System.currentTimeMillis();
         return words;
     }
 
@@ -170,5 +182,6 @@ public class Main {
             System.out.println("File not found! :(");
         }
     }
+
 }
 
