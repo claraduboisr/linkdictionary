@@ -11,8 +11,6 @@ import java.util.Scanner;
 
 public class Main {
 
-
-
     public static void main(String[] args) {
         Main app = new Main(args);
     }
@@ -55,16 +53,8 @@ public class Main {
                     }
                 }
             }
-            /*for (LinkedList list_words : dictionary){
-                for(int i=0; i<list_words.size(); i++){
-                    // Java no sabe el tipo de variable que hay en el LinkedList dentro del Array asi q se indica con un cast --> (String)
-                    String word = (String) list_words.get(i);
-                    System.out.println(word);
-                }
-            }*/
             // Cerrar scanner para habilitar el acceso al file
             scan.close();
-
 
             file_ordered(dictionary, path);
 
@@ -75,14 +65,12 @@ public class Main {
             System.out.println("File not found :(");
         }
 
-
     }
 
     public void process_user_input(String[] args, LinkedList<String>[] dictionary, char[] alphabet) {
 
         if (args.length > 10){
             System.out.println("Too many arguments, max number of arguments: 10");
-
         }
         else{
             for(int i=0; i<args.length; i++){
@@ -105,9 +93,6 @@ public class Main {
                             }
                         }
                     }
-
-
-
                     // if it gets to "catch" it means that it is a String
                 } catch(NumberFormatException e) {
 
@@ -135,9 +120,6 @@ public class Main {
                 }
             }
         }
-
-
-
     }
 
     public LinkedList put_method (LinkedList<String>words, String s, String normal){
@@ -164,9 +146,7 @@ public class Main {
             }
             words.add(position, s);
         }
-
         return words;
-
     }
 
     public void file_ordered (LinkedList[] dictionary, Path path){
@@ -183,16 +163,12 @@ public class Main {
                     dict_ordered.write(word + "\n");
                 }
             }
-
             dict_ordered.close();
 
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("File not found! :(");
         }
-
-
     }
-
 }
 
