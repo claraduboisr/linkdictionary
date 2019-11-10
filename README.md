@@ -17,6 +17,8 @@ The following project is a pair programming project done by Clara Dubois and Cla
    * The created “dictionary” will be a sorted list of all the words read from the file
    * After the “unsorteddict.txt” has been fully read, the application will create another file called “sorteddict.txt” which will contain all the words
 (one word per line) alphabetically ordered
+   * Performance test by evaluating timing 
+   * Verification test
  
 ### 2. Code Description
 ##### Structure:
@@ -145,4 +147,50 @@ We created a new method called ```public void process_user_input(String[] args, 
         System.out.println("-1");
     }
    }
-  
+   ```
+#### Inputs
+   -  Word (_apple_)
+      -  If it is in the list, it will return the index
+      -  If it does not exist, it will return -1
+      
+   -  Integer (_4_, _765_)
+      -  If it is more than 1 and less than the dictionary's size, it will return the word 
+      -  If it does not exist, "Index not in dictionary"
+      -  If it is a negative number, it will return "x is a negative number, please introduce a positive number"
+   - Others
+      -  Mix between strings and integers (_appl4e_)
+
+### Verification Test
+Once the user inputs the value "-1" in the command line arguments, no matter the position is placed, the following command will be run in the test file. 
+
+> Why do not we choose the word "test" as an argument to activate the test? Otherwise, it will be considered as a String input and, as is not in the file, it will return a "-1".
+
+#### Check several words that the position matches
+Using the method Random, the system selects 5 indexes and compare if it matches with the file already corrected and the file created (with this code).
+
+#### Test 10,000
+Having a unsorted file, first we sort it with the same code as with the big file. Once is sorted, it is checked with the file already given ("sortedDictTest.txt")
+
+### Performance Test
+Using ```double startTime = System.currentTimeMillis(); ``` and ```double startTime = System.currentTimeMillis();``` and having placed them in different sections of the code, we have calculated:
+  -  Total time it takes to run all the code
+  -  Fastest and slowest method between all.
+
+In addition, having placed this timers, we noticed that in several iterators, the process was very slow. For that reason, we used list iterators:
+´´´java
+   ListIterator<String> iterator = words.listIterator();
+               while(iterator.hasNext()){
+                   String element = iterator.next();
+                   int comparisson = normal.compareToIgnoreCase(Normalizer.normalize(element, Normalizer.Form.NFD));
+                   if (comparisson < 0){
+                       iterator.previous();
+                       break;
+                   }
+               }
+               iterator.add(s);
+´´´
+
+
+
+
+
