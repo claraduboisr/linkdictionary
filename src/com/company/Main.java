@@ -150,6 +150,8 @@ public class Main {
         Scanner scan_correct2 = new Scanner(correct_file);
         Scanner scan_to_check2 = new Scanner(to_check_file);
 
+        // Como no puedo acceder a una linea del file directamente
+        // pongo all el file en la lista y luego busco la posicion
         LinkedList<String> testing = new LinkedList<>();
         LinkedList<String> correct = new LinkedList<>();
 
@@ -195,7 +197,7 @@ public class Main {
                     int position = Integer.parseInt(args[i]) - 1;
 
                     if (position < 0) {
-                        System.out.println(args[i] + ": " + "is a negative number, please introduce a postive number.");
+                        System.out.println(args[i] + ": " + "is a negative number, please introduce a positive number.");
                     } else {
                         for (int j = 0; j < alphabet.length; j++) {
                             if (position - dictionary[j].size() < 0) {
