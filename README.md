@@ -160,12 +160,12 @@ We created a new method called ```public void process_user_input(String[] args, 
    - Others
       -  Mix between strings and integers (_appl4e_)
 
-### Verification Test
+### Verification Test:
 Once the user inputs the value "-1" in the command line arguments, no matter the position is placed, the following command will be run in the test file. 
 
 > Why do not we choose the word "test" as an argument to activate the test? Otherwise, it will be considered as a String input and, as is not in the file, it will return a "-1".
 
-#### Check several words that the position matches
+#### Check several words that the position matches:
 Using the method Random, the system selects 5 indexes and compare if it matches with the file already corrected and the file created (with this code).
 
 #### Test 10,000
@@ -176,7 +176,7 @@ Using ```double startTime = System.currentTimeMillis(); ``` and ```double startT
   -  Total time it takes to run all the code
   -  Fastest and slowest method between all.
 
-In addition, having placed this timers, we noticed that in several iterators, the process was very slow. For that reason, we used list iterators:
+Additionally, having placed this timers, we noticed that in several iterators, the process was very slow. For that reason, we used list iterators:
 ´´´java
    ListIterator<String> iterator = words.listIterator();
                while(iterator.hasNext()){
