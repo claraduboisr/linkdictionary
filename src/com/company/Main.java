@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.text.Normalizer;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Random;
 import java.util.Scanner;
 
 // Whenever a user wants to input a word with an apostrophe they have tpo surround it with ""
@@ -15,15 +16,28 @@ import java.util.Scanner;
 
 public class Main {
 
+    double maxTime = 0;
+    String slowMethod = "";
+    double minTime = 1000;
+    String fastMethod = "";
+
     public static void main(String[] args) {
         Main app = new Main(args);
         // System.out.println("Execution time in seconds  : " + timeElapsed/1000);
     }
 
     public Main(String[] args){
-        // Entrar en Resources y encontrar el "unsorteddict.txt"
-        // Encontrar el path hasta la carpeta linkdictionary incluida
-        //double startTime = System.currentTimeMillis();
+
+        System.out.println();
+        System.out.println("PLEASE WAIT");
+        System.out.println("____________________________________________________________________________________________________________________________________");
+        System.out.println("");
+        System.out.println("Hello there! You can do plenty of functionalities with this program :)");
+        System.out.println("If you write a number, it will be considered as an indux and it will return the word in that index");
+        System.out.println("If you write a word, it will return the index related to that word");
+        System.out.println("REMEMBER: If in the command line you write a '-1', no matter the position, all the arguments will be analyzed in the test mode file");
+        System.out.println("____________________________________________________________________________________________________________________________________");
+
         Path path = FileSystems.getDefault().getPath("").toAbsolutePath();
 
         // Si el programa se ejecuta desde src, salir de source para encontrar el file unsorteddict.txt
@@ -62,10 +76,9 @@ public class Main {
             while (scan.hasNextLine()) {
                 String s = scan.nextLine();
                 String normal = Normalizer.normalize(s, Normalizer.Form.NFD);
-
                 for (int i = 0; i<size; i++){
                     if (Character.toLowerCase(normal.charAt(0))== alphabet[i]){
-                        dictionary[i] = put_method(dictionary[i], s, normal);
+                        dictionary[i] = insert(dictionary[i], s, normal);
                     }
                 }
             }
@@ -78,7 +91,11 @@ public class Main {
             process_user_input(args, dictionary, alphabet);
 
             double endTime = System.currentTimeMillis();
-            System.out.println(endTime - startTime);
+            System.out.println("Thank you for waiting, all the program has taken: " + ((endTime - startTime)/1000) + " seconds");
+
+            System.out.println("  -  The SLOWEST method is : " + slowMethod + " with " + maxTime + " miliseconds");
+            System.out.println("  -  The FASTEST method is : " + fastMethod + " with " + minTime + " miliseconds");
+            System.out.println("____________________________________________________________________________________________________________________________________");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -88,10 +105,13 @@ public class Main {
 
     private void test() throws FileNotFoundException {
 
+        double startTime1 = System.currentTimeMillis();
+        System.out.println("____________________________________________________________________________________________________________________________________");
         System.out.println();
-        System.out.println("Test Mode");
+        System.out.println("TESTS:");
 
-        System.out.println("Check word by word");
+        System.out.println("Test #1");
+        System.out.println("   ...checking the 10,000 words, word by word...");
 
         // Para abrir los dos files sorteddict.txt & sortedDictTest.txt
         Path path = FileSystems.getDefault().getPath("").toAbsolutePath();
@@ -104,6 +124,7 @@ public class Main {
         String to_check_file_dict_path = path + "/Resources" + "/sorteddict.txt";
         File to_check_file = new File(to_check_file_dict_path);
 
+        // Cada scan esta conectado con un file
         Scanner scan_correct = new Scanner(correct_file);
         Scanner scan_to_check = new Scanner(to_check_file);
 
@@ -113,25 +134,58 @@ public class Main {
             String correct = scan_correct.next();
             String to_check = scan_to_check.next();
             if (!correct.equals(to_check)){
-                System.out.println("The file has an error, line "+ word_index + " : " + correct + " != " + to_check);
+                System.out.println("   The file has an error, line "+ word_index + " : " + correct + " != " + to_check);
             }
         }
 
-        if(scan_to_check.hasNext()) System.out.println("The files are of different lengths");
+        if(scan_to_check.hasNext()) System.out.println("   The files are of different lengths");
+        else System.out.println("   Test 1 done succesfully");
         scan_correct.close();
         scan_to_check.close();
 
-        System.out.println("Check 5 random positions");
+        System.out.println("");
+        System.out.println("Test #2: Check 5 random positions");
 
-        System.out.println("Test Mode END");
+        // Cada scan esta conectado con un file
+        Scanner scan_correct2 = new Scanner(correct_file);
+        Scanner scan_to_check2 = new Scanner(to_check_file);
 
+        LinkedList<String> testing = new LinkedList<>();
+        LinkedList<String> correct = new LinkedList<>();
+
+        while(scan_correct2.hasNext()){
+            correct.add(scan_correct2.next());
+            testing.add(scan_to_check2.next());
+        }
+        Random random = new Random();
+        for(int i=0; i<5; i++){
+            int index = random.nextInt(10000);
+            System.out.println( "  -  " +index + " --> Correct: " + correct.get(index) + " | Test: " + testing.get(index));
+        }
+
+        System.out.println("____________________________________________________________________________________________________________________________________");
+        System.out.println();
+        double endTime1 = System.currentTimeMillis();
+        if ((endTime1 - startTime1) > maxTime) {
+            maxTime = (endTime1 - startTime1);
+            slowMethod = "test() Method";
+        }
+        if ((endTime1 - startTime1) < minTime) {
+            minTime = (endTime1 - startTime1);
+            fastMethod = "test() Method";
+        }
     }
 
     public void process_user_input(String[] args, LinkedList<String>[] dictionary, char[] alphabet) throws FileNotFoundException {
-
+        double startTime2 = System.currentTimeMillis();
         if (args.length > 10) {
             System.out.println("Too many arguments, max number of arguments: 10");
         } else {
+            // Regular expressions
+            // -? significa que puede tener un - delante del numero
+            // /d significa que es un integer
+            // + puede tener tanto integers como sean necesarios
+            // -?[0-9]+
             String pattern = "-?\\d+";
             for (int i = 0; i < args.length; i++) {
 
@@ -141,48 +195,62 @@ public class Main {
                     int position = Integer.parseInt(args[i]) - 1;
 
                     if (position < 0) {
-                        System.out.println("Please introduce a postive number.");
+                        System.out.println(args[i] + ": " + "is a negative number, please introduce a postive number.");
                     } else {
                         for (int j = 0; j < alphabet.length; j++) {
                             if (position - dictionary[j].size() < 0) {
-                                System.out.println(dictionary[j].get(position));
+                                System.out.println(args[i] + ": " + dictionary[j].get(position));
                                 break;
                             } else {
                                 position = position - dictionary[j].size();
                             }
                             if (j == 25) {
-                                System.out.println("Index not in dictionary");
+                                System.out.println(args[i] + ": " + "Index not in dictionary");
                             }
                         }
                     }
                 } else {
 
-                    for (int j = 0; j < alphabet.length; j++) {
-                        if (Character.toLowerCase(args[i].charAt(0))== alphabet[j]) {
-                            int position = dictionary[j].indexOf(args[i]);
-                            if (position == -1) {
-                                System.out.println(position);
-                                break;
-                            } else {
-                                position++;
-                                for (int g = j - 1; g >= 0; g--) {
-                                    position += dictionary[g].size();
+                    if (!args[i].matches(".*\\d.*")){
+                        for (int j = 0; j < alphabet.length; j++) {
+                            if (Character.toLowerCase(args[i].charAt(0))== alphabet[j]) {
+                                int position = dictionary[j].indexOf(args[i]);
+                                if (position == -1) {
+                                    System.out.println(args[i] + ": " + position);
+                                    break;
+                                } else {
+                                    position++;
+                                    for (int g = j - 1; g >= 0; g--) {
+                                        position += dictionary[g].size();
+                                    }
+                                    System.out.println(args[i] + ": " + position);
+                                    break;
                                 }
-                                System.out.println(position);
-                                break;
+                            }
+                            if (j == 25) {
+                                System.out.println(args[i] + ": " + "-1");
                             }
                         }
-                        if (j == 25) {
-                            System.out.println("-1");
-                        }
+                    } else {
+                        System.out.println(args[i] + ": is not a String");
                     }
                 }
             }
         }
+        double endTime2 = System.currentTimeMillis();
+        if ((endTime2 - startTime2) > maxTime) {
+            maxTime = (endTime2 - startTime2);
+            slowMethod = "process_user_input() Method";
+        }
+        if (((endTime2 - startTime2)) < minTime) {
+            minTime = (endTime2 - startTime2);
+            fastMethod = "process_user_input()";
+        }
     }
 
-    public LinkedList put_method (LinkedList<String>words, String s, String normal){
+    public LinkedList insert (LinkedList<String>words, String s, String normal){
 
+        double startTime3 = System.currentTimeMillis();
         if (words == null){
             words = new LinkedList<>();
             words.add(0, s);
@@ -216,10 +284,20 @@ public class Main {
             words.add(position, s);*/
         }
         int time_end = (int) System.currentTimeMillis();
+        double endTime3 = System.currentTimeMillis();
+        if (((endTime3 - startTime3)) > maxTime) {
+            maxTime = (endTime3 - startTime3);
+            slowMethod = "insert() Method";
+        }
+        if (((endTime3 - startTime3)) < minTime) {
+            minTime = (endTime3 - startTime3);
+            fastMethod = "insert() Method";
+        }
         return words;
     }
 
     public void file_ordered (LinkedList[] dictionary, Path path){
+        double startTime4 = System.currentTimeMillis();
         File file = new File(path + "/Resources" + "/sorteddict.txt");
 
         //Write Content
@@ -227,10 +305,11 @@ public class Main {
         try {
             dict_ordered = new FileWriter(file);
             for (LinkedList list_words : dictionary){
-                for(int i=0; i<list_words.size(); i++){
-                    // Java no sabe el tipo de variable que hay en el LinkedList dentro del Array asi q se indica con un cast --> (String)
-                    String word = (String) list_words.get(i);
-                    dict_ordered.write(word + "\n");
+
+                ListIterator<String> iterator = list_words.listIterator();
+                while(iterator.hasNext()){
+                    String element = iterator.next();
+                    dict_ordered.write(element + "\n");
                 }
             }
             dict_ordered.close();
@@ -238,6 +317,15 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("File not found! :(");
+        }
+        double endTime4 = System.currentTimeMillis();
+        if (((endTime4 - startTime4)) > maxTime) {
+            maxTime = (endTime4 - startTime4);
+            slowMethod = "file_ordered() Method";
+        }
+        if (((endTime4 - startTime4)) < minTime) {
+            minTime = (endTime4 - startTime4);
+            fastMethod = "file_ordered() Method";
         }
     }
 }
