@@ -165,11 +165,11 @@ We created a new method called ```public void process_user_input(String[] args, 
       -  Using regex: ```".*\\d.*"```, it will know that, if a string has any integer in between, it will return "It is not a String"
 
 ### 3. Verification Test
-Once the user inputs the value "-1" in the command line arguments, no matter the position is placed, the following command will be run in the test file. 
+Once the user inputs the value "-1" in the command line arguments, no matter what is the position, the following command will be run in the test file. 
 
 > Why do not we choose the word "test" as an argument to activate the test? Otherwise, it will be considered as a String input and, as is not in the file, it will return a "-1".
 
-#### Check several words that the position matches
+#### Check several words that the position matches (5 random words)
 Using the method Random, the system selects 5 indexes and compare if it matches with the file already corrected and the file created (with this code).
 
 1. We need two scanners, one for each file.
@@ -218,7 +218,7 @@ Having a unsorted file, first we sort it with the same code as with the big file
         Scanner scan_correct = new Scanner(correct_file);
         Scanner scan_to_check = new Scanner(to_check_file);
 ```
-3.a. If the given sorted-file has a next line, it will continue with the while, and in that way, it will compare both lines.
+3. If the given sorted-file has a next line, it will continue with the while, and in that way, it will compare both lines.
 ```java
         int word_index = 0;
         while (scan_correct.hasNext()){
@@ -230,11 +230,11 @@ Having a unsorted file, first we sort it with the same code as with the big file
             }
         }
 ```
-3.b. If the given sorted-file has a next line and the other one hasn't, it will return "Files has different lengths".
+4. If the given sorted-file has a next line and the other one hasn't, it will return "Files has different lengths".
 ```java
         if(scan_to_check.hasNext()) System.out.println("   The files are of different lengths");
 ```
-4. Close scanners
+5. Close scanners
 ```java
         else System.out.println("   Test 1 done succesfully");
         scan_correct.close();
@@ -262,7 +262,7 @@ Using ```double startTime = System.currentTimeMillis(); ``` and ```double startT
 ```
 
 In addition, having placed this timers, we noticed that in several iterators, the process was very slow. For that reason, we used list iterators:
-´´´java
+```java
    ListIterator<String> iterator = words.listIterator();
                while(iterator.hasNext()){
                    String element = iterator.next();
@@ -273,4 +273,4 @@ In addition, having placed this timers, we noticed that in several iterators, th
                    }
                }
                iterator.add(s);
-´´´                            
+```                          
