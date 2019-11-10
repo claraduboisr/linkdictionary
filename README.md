@@ -241,6 +241,8 @@ Having a unsorted file, first we sort it with the same code as with the big file
         scan_correct.close();
         scan_to_check.close();
 ```
+![test_1return](https://user-images.githubusercontent.com/42964691/68551669-92139980-040f-11ea-8e09-0512e63f5d17.png)
+
 
 ### 4. Performance Test
 Using ```double startTime = System.currentTimeMillis(); ``` and ```double startTime = System.currentTimeMillis();``` and having placed them in different sections of the code, we have calculated:
@@ -261,6 +263,8 @@ Using ```double startTime = System.currentTimeMillis(); ``` and ```double startT
             fastMethod = "process_user_input()";
         }
 ```
+![return](https://user-images.githubusercontent.com/42964691/68551658-71e3da80-040f-11ea-93c5-f324ba94ec17.png)
+
 
 In addition, having placed this timers, we noticed that in several iterators, the process was very slow. For that reason, we used list iterators:
 ```java
