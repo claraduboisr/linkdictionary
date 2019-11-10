@@ -197,6 +197,7 @@ Using the method Random, the system selects 5 indexes and compare if it matches 
             System.out.println( "  -  " +index + " --> Correct: " + correct.get(index) + " | Test: " + testing.get(index));
         }
 ```
+![test2_return](https://user-images.githubusercontent.com/42964691/68551597-da7e8780-040e-11ea-9b3f-95b0466e623b.png)
 
 #### Test 10,000
 Having a unsorted file, first we sort it with the same code as with the big file. Once is sorted, it is checked with the file already given ("sortedDictTest.txt")
