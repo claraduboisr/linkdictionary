@@ -155,7 +155,7 @@ We created a new method called ```public void process_user_input(String[] args, 
       -  Using regex: ```"-?\\d+"``` we know that it is an integer if it follows that structure
         -  -? --> you can have a "-" in front of the number
         -  /d --> means that it is a integer
-        -  +  --> can have many integers as you wish
+        -  '+'  --> can have many integers as you wish
         -  It is the same as ```-?[0-9]+```
       -  If it is more than 1 and less than the dictionary's size, it will return the word 
       -  If it does not exist, "Index not in dictionary"
@@ -211,7 +211,8 @@ Having a unsorted file, first we sort it with the same code as with the big file
         scan_correct.close();
         scan_to_check.close();
 ```
-![test_1return](https://user-images.githubusercontent.com/42964691/68551669-92139980-040f-11ea-8e09-0512e63f5d17.png)
+* **_Return:_**
+   ![test_1return](https://user-images.githubusercontent.com/42964691/68551669-92139980-040f-11ea-8e09-0512e63f5d17.png)
 
 #### Check several words that the position matches (5 random words)
 Using the method Random, the system selects 5 indexes and compare if it matches with the file already corrected and the file created (with this code).
@@ -241,7 +242,8 @@ Using the method Random, the system selects 5 indexes and compare if it matches 
             System.out.println( "  -  " +index + " --> Correct: " + correct.get(index) + " | Test: " + testing.get(index));
         }
 ```
-![test2_return](https://user-images.githubusercontent.com/42964691/68551597-da7e8780-040e-11ea-9b3f-95b0466e623b.png)
+* **_Return:_**
+  ![test2_return](https://user-images.githubusercontent.com/42964691/68551597-da7e8780-040e-11ea-9b3f-95b0466e623b.png)
 
 ### 4. Performance Test
 Using ```double startTime = System.currentTimeMillis(); ``` and ```double startTime = System.currentTimeMillis();``` and having placed them in different sections of the code, we have calculated:
@@ -262,7 +264,8 @@ Using ```double startTime = System.currentTimeMillis(); ``` and ```double startT
             fastMethod = "process_user_input()";
         }
 ```
-![return](https://user-images.githubusercontent.com/42964691/68551742-61802f80-0410-11ea-9c07-d5306e59ced2.png)
+* **_Return:_**
+   ![return](https://user-images.githubusercontent.com/42964691/68551742-61802f80-0410-11ea-9c07-d5306e59ced2.png)
 
 
 In addition, having placed this timers, we noticed that in several iterators, the process was very slow. For that reason, we used list iterators:
