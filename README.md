@@ -169,36 +169,6 @@ Once the user inputs the value "-1" in the command line arguments, no matter wha
 
 > Why do not we choose the word "test" as an argument to activate the test? Otherwise, it will be considered as a String input and, as is not in the file, it will return a "-1".
 
-#### Check several words that the position matches (5 random words)
-Using the method Random, the system selects 5 indexes and compare if it matches with the file already corrected and the file created (with this code).
-
-1. We need two scanners, one for each file.
-```java
-        Scanner scan_correct2 = new Scanner(correct_file);
-        Scanner scan_to_check2 = new Scanner(to_check_file);
-```
-2. As we cannot directly read the file, we created two lists.
-```java
-        LinkedList<String> testing = new LinkedList<>();
-        LinkedList<String> correct = new LinkedList<>();
-```
-3. I add all the file in the "testing" and "correct" lists so I can compare it
-```java
-        while(scan_correct2.hasNext()){
-            correct.add(scan_correct2.next());
-            testing.add(scan_to_check2.next());
-        }
-```
-4. The system picks randomly 5 indexes and it is printed the word with that index in the sorted-given file and the other sorted file (created with this code).
-```java
-        Random random = new Random();
-        for(int i=0; i<5; i++){
-            int index = random.nextInt(10000);
-            System.out.println( "  -  " +index + " --> Correct: " + correct.get(index) + " | Test: " + testing.get(index));
-        }
-```
-![test2_return](https://user-images.githubusercontent.com/42964691/68551597-da7e8780-040e-11ea-9b3f-95b0466e623b.png)
-
 #### Test 10,000
 Having a unsorted file, first we sort it with the same code as with the big file. Once is sorted, it is checked with the file already given ("sortedDictTest.txt")
 
@@ -243,6 +213,35 @@ Having a unsorted file, first we sort it with the same code as with the big file
 ```
 ![test_1return](https://user-images.githubusercontent.com/42964691/68551669-92139980-040f-11ea-8e09-0512e63f5d17.png)
 
+#### Check several words that the position matches (5 random words)
+Using the method Random, the system selects 5 indexes and compare if it matches with the file already corrected and the file created (with this code).
+
+1. We need two scanners, one for each file.
+```java
+        Scanner scan_correct2 = new Scanner(correct_file);
+        Scanner scan_to_check2 = new Scanner(to_check_file);
+```
+2. As we cannot directly read the file, we created two lists.
+```java
+        LinkedList<String> testing = new LinkedList<>();
+        LinkedList<String> correct = new LinkedList<>();
+```
+3. I add all the file in the "testing" and "correct" lists so I can compare it
+```java
+        while(scan_correct2.hasNext()){
+            correct.add(scan_correct2.next());
+            testing.add(scan_to_check2.next());
+        }
+```
+4. The system picks randomly 5 indexes and it is printed the word with that index in the sorted-given file and the other sorted file (created with this code).
+```java
+        Random random = new Random();
+        for(int i=0; i<5; i++){
+            int index = random.nextInt(10000);
+            System.out.println( "  -  " +index + " --> Correct: " + correct.get(index) + " | Test: " + testing.get(index));
+        }
+```
+![test2_return](https://user-images.githubusercontent.com/42964691/68551597-da7e8780-040e-11ea-9b3f-95b0466e623b.png)
 
 ### 4. Performance Test
 Using ```double startTime = System.currentTimeMillis(); ``` and ```double startTime = System.currentTimeMillis();``` and having placed them in different sections of the code, we have calculated:
@@ -263,7 +262,7 @@ Using ```double startTime = System.currentTimeMillis(); ``` and ```double startT
             fastMethod = "process_user_input()";
         }
 ```
-![return](https://user-images.githubusercontent.com/42964691/68551658-71e3da80-040f-11ea-93c5-f324ba94ec17.png)
+![return](https://user-images.githubusercontent.com/42964691/68551742-61802f80-0410-11ea-9c07-d5306e59ced2.png)
 
 
 In addition, having placed this timers, we noticed that in several iterators, the process was very slow. For that reason, we used list iterators:
