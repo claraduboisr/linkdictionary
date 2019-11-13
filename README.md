@@ -6,6 +6,7 @@ The following project is a pair programming project done by Clara Dubois and Cla
 ### 2. Code Description
 ### 3. Verification Test
 ### 4. Performance Test
+### 5. Coding principles
 
 
 ![background](https://s7d5.scene7.com/is/image/horizonhobby/HHEU-airme-info-960x100?$Default$)
@@ -281,3 +282,5 @@ In addition, having placed this timers, we noticed that in several iterators, th
                }
                iterator.add(s);
 ```                          
+### 5. Coding principles
+
