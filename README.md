@@ -283,4 +283,168 @@ In addition, having placed this timers, we noticed that in several iterators, th
                iterator.add(s);
 ```                          
 ### 5. Coding principles
+#### Meaningful Names
+| Before | After |
+| :---: | :-----------: |
+| ```insert()``` | ```SortAndInsertInLinkdictionary``` |
+| ```file_ordered()``` | ```CreateFileWithSortedDictionary``` |
+| ```process_user_input()``` | ```AcceptAndProcessUserCommandLineInput``` |
+| ```test()``` | ```ExecuteTestMode``` |
+
+#### Keep Functions Small
+Due to static code analysis, for the main()
+
+```IteratorAddingWord```
+Different changes in the different methods:
+##### Main()
+**1.	PrintIntroduction()**
+```java
+System.out.println("\nPLEASE WAIT");
+        System.out.println("____________________________________________________________________________________________________________________________________\n");
+        System.out.println("Hello there! You can do plenty of functionalities with this program :)");
+        System.out.println("If you write a number, it will be considered as an indux and it will return the word in that index");
+        System.out.println("If you write a word, it will return the index related to that word");
+        System.out.println("REMEMBER: If in the command line you write a '-1', no matter the position, all the arguments will be analyzed in the test mode file");
+        System.out.println("____________________________________________________________________________________________________________________________________");
+```
+
+**2.	CreateAndSortDictionary(file, alphabet)**
+
+```java 
+       int size = 26;
+        LinkedList<String>[]dictionary = new LinkedList[size];
+        try {
+            Scanner scan = new Scanner (file);
+            while (scan.hasNextLine()) {
+                String s = scan.nextLine();
+                String normal = Normalizer.normalize(s, Normalizer.Form.NFD);
+                for (int i = 0; i<size; i++){
+                    if (Character.toLowerCase(normal.charAt(0))== alphabet[i]){
+                        dictionary[i] = SortAndInsertInLinkdictionary(dictionary[i], s, normal);
+                    }
+                }
+            }
+            System.out.println();
+            scan.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("File not found :(");
+            return null;
+        }
+        return dictionary;
+```
+    -  ```File file = new file (file_dict_path)``` and ```char [] alphabet``` are moved outside of the new method
+    -  We removed:
+      ```java
+      System.out.println("  -  The SLOWEST method is : " + slowMethod + " with " + maxTime + " miliseconds");
+      System.out.println("  -  The FASTEST method is : " + fastMethod + " with " + minTime + " miliseconds");
+      System.out.println("________________________________________________________________________________");
+       ``` 
+     and created a new method to simplify it more: ```PrintSpeedMethod()```
+    -  As it returns a LinkedList (already sorted) named dictionary, outside the method, it is declared as a new variable: ```LinkedList <String>[] dictionary = CreateAndSortDictionary(file, alphabet)```
+
+**3.	CreateFileWithSortedDictionary(Objects.requireNonNull(dictionary), ResourcesPath)**
+     
+        ```java 
+        double startTime4 = System.currentTimeMillis();
+        File file = new File( ResourcesPath + "/sorteddict.txt");
+        //Write Content
+        FileWriter dict_ordered = null;
+        try {
+            dict_ordered = new FileWriter(file);
+            for (LinkedList list_words : dictionary){
+
+                for (String element : (Iterable<String>) list_words) {
+                    dict_ordered.write(element + "\n");
+                }
+            }
+            dict_ordered.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("File not found! :(");
+        }
+        double endTime4 = System.currentTimeMillis();
+        if (((endTime4 - startTime4)) > maxTime) {
+            maxTime = (endTime4 - startTime4);
+            slowMethod = "file_ordered() Method";
+        }
+        if (((endTime4 - startTime4)) < minTime) {
+            minTime = (endTime4 - startTime4);
+            fastMethod = "file_ordered() Method";
+        }
+        ```
+        
+   -  _Objects.requireNonNull(dictionary)_: means that, as the dictionary may return a "null", this specifies not to be null
+   - _ResourcesPath_: Applying the 5th principle, it is a new variable which holds path + "/Resources" 
+
+##### ExecuteTestMode(String ResourcesPath)
+We divided the code in this method into three different methods: one for introducing, one for test 1 and another for test 2 code.
+**1. InitializingTestMode()**
+We include:
+   ```java
+   System.out.println("________________________________________________________________________________________\n");
+   System.out.println("TESTS:");
+   ```
+   - Applying the 7th principle, we eliminated lines of code that we weren´t using. So instead of using ```System.out.println()```(so we could include a white space, we changed add to a using line of code ```/n```.
+
+**2. Test1(File correct_file, File to_check_file)**
+```java 
+System.out.println("Test #1");
+        System.out.println("   ...checking the 10,000 words, word by word...");
+        Scanner scan_correct = new Scanner(correct_file);
+        Scanner scan_to_check = new Scanner(to_check_file);
+
+        int word_index = 0;
+        while (scan_correct.hasNext()){
+            word_index ++;
+            String correct = scan_correct.next();
+            String to_check = scan_to_check.next();
+            if (!correct.equals(to_check)){
+                System.out.println("   The file has an error, line "+ word_index + " : " + correct + " != " + to_check);
+            }
+        }
+
+        if(scan_to_check.hasNext()) System.out.println("   The files are of different lengths");
+        else System.out.println("   Test 1 done succesfully");
+        scan_correct.close();
+        scan_to_check.close();
+```
+**3. Test2(File correct_file, File to_check_file)**
+```java
+System.out.println("\nTest #2: Check 5 random positions");
+Scanner scan_correct2 = new Scanner(correct_file);
+Scanner scan_to_check2 = new Scanner(to_check_file);
+
+LinkedList<String> testing = new LinkedList<>();
+LinkedList<String> correct = new LinkedList<>();
+
+while(scan_correct2.hasNext()){
+    correct.add(scan_correct2.next());
+    testing.add(scan_to_check2.next());
+}
+Random random = new Random();
+for(int i=0; i<5; i++){
+    int index = random.nextInt(10000);
+    System.out.println( "  -  " +index + " --> Correct: " + correct.get(index) + " | Test: " + testing.get(index));
+}
+System.out.println("___________________________________________________________________________________________\n");
+```
+
+#### Avoid Redundant Commenting
+In the last commit, we had up to 31 lines of commenting. Right now we have 6 lines.
+We decided to remove these lines of commenting because, having change names of methods and variables, it made it clearer the purpose of the code and the comments were redundant information. 
+
+#### Single Responsibility Principle
+
+#### Don't Repeat Yourself
+String ResourcesPath = path + "/Resources"; insted of writing all the time path + "/Resources"
+-  Also, for a few methods, this made us change the variables that the methods needed: from path to ResourcesPath
+
+#### Keep Your Code Simple
+
+#### YAGNI (You Ain't Gonna Need It)
+
+Change to private the "double maxTime = 0"
 
