@@ -72,7 +72,7 @@ public class Main {
         System.out.println("\nPLEASE WAIT");
         System.out.println("____________________________________________________________________________________________________________________________________\n");
         System.out.println("Hello there! You can do plenty of functionalities with this program :)");
-        System.out.println("If you write a number, it will be considered as an indux and it will return the word in that index");
+        System.out.println("If you write a number, it will be considered as an index and it will return the word in that index");
         System.out.println("If you write a word, it will return the index related to that word");
         System.out.println("REMEMBER: If in the command line you write a '-1', no matter the position, all the arguments will be analyzed in the test mode file");
         System.out.println("REMEMBER: Whenever a user wants to input a word with an apostrophe they have to surround it with ''");
