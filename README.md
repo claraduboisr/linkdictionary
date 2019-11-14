@@ -259,11 +259,11 @@ Using ```double startTime = System.currentTimeMillis(); ``` and ```double startT
         double endTime1 = System.currentTimeMillis();
         if ((endTime1 - startTime2) > maxTime) {
             maxTime = (endTime2 - startTime2);
-            slowMethod = "process_user_input() Method";
+            slowMethod = "ExecuteTestMode() Method";
         }
         if (((endTime2 - startTime2)) < minTime) {
             minTime = (endTime2 - startTime2);
-            fastMethod = "process_user_input()";
+            fastMethod = "ExecuteTestMode()";
         }
 ```
 * **_Return:_**
@@ -362,11 +362,11 @@ try {
 double endTime4 = System.currentTimeMillis();
 if (((endTime4 - startTime4)) > maxTime) {
     maxTime = (endTime4 - startTime4);
-    slowMethod = "file_ordered() Method";
+    slowMethod = "CreateFileWithSortedDictionary() Method";
 }
 if (((endTime4 - startTime4)) < minTime) {
     minTime = (endTime4 - startTime4);
-    fastMethod = "file_ordered() Method";
+    fastMethod = "CreateFileWithSortedDictionary() Method";
 }
 ``` 
    -  _Objects.requireNonNull(dictionary)_: means that, as the dictionary may return a "null", this specifies not to be null
