@@ -50,16 +50,15 @@ File file = new File(file_dict_path);
 Scanner scan = new Scanner (file);
 
 while (scan.hasNextLine()) {
-    String s = scan.nextLine();
-    String normal = Normalizer.normalize(s, Normalizer.Form.NFD);
+  String s = scan.nextLine();
+  String normal = Normalizer.normalize(s, Normalizer.Form.NFD);
 
-    for (int i = 0; i<size; i++){
-        if (Character.toLowerCase(normal.charAt(0))== alphabet[i]){
-            dictionary[i] = put_method(dictionary[i], s, normal);
-        }
-    }
+  for (int i = 0; i<size; i++){
+      if (Character.toLowerCase(normal.charAt(0))== alphabet[i]){
+          dictionary[i] = put_method(dictionary[i], s, normal);
+      }
+  }
 }
-
 scan.close();
 ```
 
@@ -93,10 +92,10 @@ To write all the words sorted, we imported ```FileWriter```
 
 ```java
 for (LinkedList list_words : dictionary){
-      for(int i=0; i<list_words.size(); i++){
-          String word = (String) list_words.get(i);
-          dict_ordered.write(word + "\n");
-      }
+  for(int i=0; i<list_words.size(); i++){
+      String word = (String) list_words.get(i);
+      dict_ordered.write(word + "\n");
+  }
 }
 dict_ordered.close();
 ```
@@ -272,16 +271,16 @@ Using ```double startTime = System.currentTimeMillis(); ``` and ```double startT
 
 In addition, having placed this timers, we noticed that in several iterators, the process was very slow. For that reason, we used list iterators:
 ```java
-   ListIterator<String> iterator = words.listIterator();
-               while(iterator.hasNext()){
-                   String element = iterator.next();
-                   int comparisson = normal.compareToIgnoreCase(Normalizer.normalize(element, Normalizer.Form.NFD));
-                   if (comparisson < 0){
-                       iterator.previous();
-                       break;
-                   }
-               }
-               iterator.add(s);
+        ListIterator<String> iterator = words.listIterator();
+        while(iterator.hasNext()){
+            String element = iterator.next();
+            int comparisson = normal.compareToIgnoreCase(Normalizer.normalize(element, Normalizer.Form.NFD));
+            if (comparisson < 0){
+                iterator.previous();
+                break;
+            }
+        }
+        iterator.add(s);
 ```                          
 ### 5. Coding principles
 #### Meaningful Names
@@ -298,18 +297,18 @@ On the other hand, we considered that proper naming and proper declaration of th
 Different changes in the different methods:
 
 ##### Main()
-**1.	PrintIntroduction()**
+###### **1.	PrintIntroduction()**
 ```java
-System.out.println("\nPLEASE WAIT");
-        System.out.println("_________________________________________________________________________________________________\n");
-        System.out.println("Hello there! You can do plenty of functionalities with this program :)");
-        System.out.println("If you write a number, it will be considered as an indux and it will return the word in that index");
-        System.out.println("If you write a word, it will return the index related to that word");
-        System.out.println("REMEMBER: If in the command line you write a '-1', no matter the position, all the arguments will be analyzed in the test mode file");
-        System.out.println("____________________________________________________________________________________________");
+         System.out.println("\nPLEASE WAIT");
+         System.out.println("_________________________________________________________________________________________\n");
+         System.out.println("Hello there! You can do plenty of functionalities with this program :)");
+         System.out.println("If you write a number, it will be considered as an index and it will return the word in that index");
+         System.out.println("If you write a word, it will return the index related to that word");
+         System.out.println("REMEMBER: If in the command line you write a '-1', no matter the position, all the arguments will be analyzed in the test mode file");
+         System.out.println("___________________________________________________________________________________________");
 ```
 
-**2.	CreateAndSortDictionary(file, alphabet)**
+###### **2.	CreateAndSortDictionary(file, alphabet)**
 ```java 
 int size = 26;
  LinkedList<String>[]dictionary = new LinkedList[size];
@@ -334,12 +333,11 @@ int size = 26;
  }
  return dictionary;
 ```
-
    -  ```File file = new file (file_dict_path)``` and ```char [] alphabet``` are moved outside of the new method
    -  We removed the prints for showing the slowest and the fastest method among the methods and created a new method to simplify it more: ```PrintSpeedMethod()```
    -  As it returns a LinkedList (already sorted) named dictionary, outside the method, it is declared as a new variable: ```LinkedList <String>[] dictionary = CreateAndSortDictionary(file, alphabet)```
 
-**3.	CreateFileWithSortedDictionary(Objects.requireNonNull(dictionary), ResourcesPath)**
+###### **3.	CreateFileWithSortedDictionary(Objects.requireNonNull(dictionary), ResourcesPath)**
 ```java 
 double startTime4 = System.currentTimeMillis();
 File file = new File( ResourcesPath + "/sorteddict.txt");
@@ -375,7 +373,7 @@ if (((endTime4 - startTime4)) < minTime) {
 ##### ExecuteTestMode(String ResourcesPath)
 We divided the code in this method into three different methods: one for introducing, one for test 1 and another for test 2 code:
 
-**1. InitializingTestMode()**
+###### **1. InitializingTestMode()**
 We include:
 ```java
 System.out.println("________________________________________________________________________________________\n");
@@ -383,7 +381,7 @@ System.out.println("TESTS:");
 ```
    - Applying the 7th principle, we eliminated lines of code that we weren´t using. So instead of using ```System.out.println()```(so we could include a white space, we changed add to a using line of code ```/n```.
 
-**2. Test1(File correct_file, File to_check_file)**
+###### **2. Test1(File correct_file, File to_check_file)**
 ```java 
 System.out.println("Test #1");
 System.out.println("   ...checking the 10,000 words, word by word...");
@@ -405,7 +403,7 @@ else System.out.println("   Test 1 done succesfully");
 scan_correct.close();
 scan_to_check.close();
 ```
-**3. Test2(File correct_file, File to_check_file)**
+###### **3. Test2(File correct_file, File to_check_file)**
 ```java
 System.out.println("\nTest #2: Check 5 random positions");
 Scanner scan_correct2 = new Scanner(correct_file);
@@ -455,7 +453,7 @@ On the other hand, we were already using constants variables:
 
 #### Keep Your Code Simple
 Instead of using a normal while loop, we used a foreach loop for two particular cases: 
- 1.
+ ###### 1.
  -  Before:
  ```java 
  ListIterator<String> iterator = list_words.listIterator();
@@ -470,7 +468,7 @@ Instead of using a normal while loop, we used a foreach loop for two particular 
                      dict_ordered.write(element + "\n");
                  }
  ```
- 2. 
+ ###### 2. 
  -  Before:
  ```java
  for (int i = 0; i < args.length; i++)
@@ -479,6 +477,8 @@ Instead of using a normal while loop, we used a foreach loop for two particular 
  ```java
  if (arg.equals("-1")) ExecuteTestMode(ResourcesPath);
  ```
+ 
+ In fact, the execution time for the whole program has decreased almost 1 second.
 
 #### YAGNI (You Ain't Gonna Need It)
 As mentioned in the "keeping functions small" principle, instead of inserting a whole ```System.out.println``` completely blank for created a white line, we removed those lines of code and insert a ´´´/n´´´ in the ```System.out.println```s.  However, before making the last commit, we made sure not to keep lines of code that we were not using
