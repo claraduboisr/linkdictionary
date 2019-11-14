@@ -7,10 +7,8 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.text.Normalizer;
 import java.util.*;
-
 import static java.util.Objects.*;
 
-// Whenever a user wants to input a word with an apostrophe they have tpo surround it with ""
 
 public class Main {
 
@@ -77,6 +75,7 @@ public class Main {
         System.out.println("If you write a number, it will be considered as an indux and it will return the word in that index");
         System.out.println("If you write a word, it will return the index related to that word");
         System.out.println("REMEMBER: If in the command line you write a '-1', no matter the position, all the arguments will be analyzed in the test mode file");
+        System.out.println("REMEMBER: Whenever a user wants to input a word with an apostrophe they have to surround it with ''");
         System.out.println("____________________________________________________________________________________________________________________________________");
     }
 
@@ -124,11 +123,11 @@ public class Main {
         double endTime3 = System.currentTimeMillis();
         if (((endTime3 - startTime3)) > maxTime) {
             maxTime = (endTime3 - startTime3);
-            slowMethod = "insert() Method";
+            slowMethod = "SortAndInsertInLinkdictionary() Method";
         }
         if (((endTime3 - startTime3)) < minTime) {
             minTime = (endTime3 - startTime3);
-            fastMethod = "insert() Method";
+            fastMethod = "SortAndInsertInLinkdictionary() Method";
         }
         return words;
     }
@@ -168,11 +167,11 @@ public class Main {
         double endTime4 = System.currentTimeMillis();
         if (((endTime4 - startTime4)) > maxTime) {
             maxTime = (endTime4 - startTime4);
-            slowMethod = "file_ordered() Method";
+            slowMethod = "CreateFileWithSortedDictionary() Method";
         }
         if (((endTime4 - startTime4)) < minTime) {
             minTime = (endTime4 - startTime4);
-            fastMethod = "file_ordered() Method";
+            fastMethod = "CreateFileWithSortedDictionary() Method";
         }
     }
 
@@ -232,11 +231,11 @@ public class Main {
         double endTime2 = System.currentTimeMillis();
         if ((endTime2 - startTime2) > maxTime) {
             maxTime = (endTime2 - startTime2);
-            slowMethod = "process_user_input() Method";
+            slowMethod = "AcceptAndProcessUserCommandLineInput() Method";
         }
         if (((endTime2 - startTime2)) < minTime) {
             minTime = (endTime2 - startTime2);
-            fastMethod = "process_user_input()";
+            fastMethod = "AcceptAndProcessUserCommandLineInput()";
         }
     }
 
@@ -261,11 +260,11 @@ public class Main {
         double endTime1 = System.currentTimeMillis();
         if ((endTime1 - startTime1) > maxTime) {
             maxTime = (endTime1 - startTime1);
-            slowMethod = "test() Method";
+            slowMethod = "ExecuteTestMode() Method";
         }
         if ((endTime1 - startTime1) < minTime) {
             minTime = (endTime1 - startTime1);
-            fastMethod = "test() Method";
+            fastMethod = "ExecuteTestMode() Method";
         }
     }
 
@@ -299,12 +298,10 @@ public class Main {
     private void Test2(File correct_file, File to_check_file) throws FileNotFoundException {
         System.out.println("\nTest #2: Check 5 random positions");
 
-        // Cada scan esta conectado con un file
+        // Each scan is connected with each file
         Scanner scan_correct2 = new Scanner(correct_file);
         Scanner scan_to_check2 = new Scanner(to_check_file);
 
-        // Como no puedo acceder a una linea del file directamente
-        // pongo all el file en la lista y luego busco la posicion
         LinkedList<String> testing = new LinkedList<>();
         LinkedList<String> correct = new LinkedList<>();
 
