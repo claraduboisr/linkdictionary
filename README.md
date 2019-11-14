@@ -106,23 +106,23 @@ We created a new method called ```public void process_user_input(String[] args, 
   - Try: If we can create the input into an int, then is considered as an index.
 
    ```java
-         int position = Integer.parseInt(args[i]) - 1;
-         if(position < 0){
-             System.out.println("Please introduce a postive number.");
-         }else{
-             for (int j = 0; j<alphabet.length; j++){
-                 if (position - dictionary[j].size() < 0){
-                     System.out.println(dictionary[j].get(position));
-                     break;
-                 }
-                 else{
-                     position = position-dictionary[j].size();
-                 }
-                 if(j==25){
-                     System.out.println("Index not in dictionary");
-                 }
-             }
-         }
+    int position = Integer.parseInt(args[i]) - 1;
+    if(position < 0){
+        System.out.println("Please introduce a postive number.");
+    }else{
+        for (int j = 0; j<alphabet.length; j++){
+            if (position - dictionary[j].size() < 0){
+                System.out.println(dictionary[j].get(position));
+                break;
+            }
+            else{
+                position = position-dictionary[j].size();
+            }
+            if(j==25){
+                System.out.println("Index not in dictionary");
+            }
+        }
+    }
    ```
   - Catch: If it cannot be converted into an int, then it can only be a String and it is considered as the word-to-be-found.
  
@@ -310,28 +310,28 @@ Different changes in the different methods:
 
 ###### **2.	CreateAndSortDictionary(file, alphabet)**
 ```java 
-int size = 26;
- LinkedList<String>[]dictionary = new LinkedList[size];
- try {
-     Scanner scan = new Scanner (file);
-     while (scan.hasNextLine()) {
-         String s = scan.nextLine();
-         String normal = Normalizer.normalize(s, Normalizer.Form.NFD);
-         for (int i = 0; i<size; i++){
-             if (Character.toLowerCase(normal.charAt(0))== alphabet[i]){
-                 dictionary[i] = SortAndInsertInLinkdictionary(dictionary[i], s, normal);
-             }
-         }
-     }
-     System.out.println();
-     scan.close();
+         int size = 26;
+          LinkedList<String>[]dictionary = new LinkedList[size];
+          try {
+              Scanner scan = new Scanner (file);
+              while (scan.hasNextLine()) {
+                  String s = scan.nextLine();
+                  String normal = Normalizer.normalize(s, Normalizer.Form.NFD);
+                  for (int i = 0; i<size; i++){
+                      if (Character.toLowerCase(normal.charAt(0))== alphabet[i]){
+                          dictionary[i] = SortAndInsertInLinkdictionary(dictionary[i], s, normal);
+                      }
+                  }
+              }
+              System.out.println();
+              scan.close();
 
- } catch (FileNotFoundException e) {
-     e.printStackTrace();
-     System.out.println("File not found :(");
-     return null;
- }
- return dictionary;
+          } catch (FileNotFoundException e) {
+              e.printStackTrace();
+              System.out.println("File not found :(");
+              return null;
+          }
+          return dictionary;
 ```
    -  ```File file = new file (file_dict_path)``` and ```char [] alphabet``` are moved outside of the new method
    -  We removed the prints for showing the slowest and the fastest method among the methods and created a new method to simplify it more: ```PrintSpeedMethod()```
@@ -339,36 +339,36 @@ int size = 26;
 
 ###### **3.	CreateFileWithSortedDictionary(Objects.requireNonNull(dictionary), ResourcesPath)**
 ```java 
-double startTime4 = System.currentTimeMillis();
-File file = new File( ResourcesPath + "/sorteddict.txt");
-//Write Content
-FileWriter dict_ordered = null;
-try {
-    dict_ordered = new FileWriter(file);
-    for (LinkedList list_words : dictionary){
+          double startTime4 = System.currentTimeMillis();
+          File file = new File( ResourcesPath + "/sorteddict.txt");
+          //Write Content
+          FileWriter dict_ordered = null;
+          try {
+              dict_ordered = new FileWriter(file);
+              for (LinkedList list_words : dictionary){
 
-        for (String element : (Iterable<String>) list_words) {
-            dict_ordered.write(element + "\n");
-        }
-    }
-    dict_ordered.close();
+                  for (String element : (Iterable<String>) list_words) {
+                      dict_ordered.write(element + "\n");
+                  }
+              }
+              dict_ordered.close();
 
-} catch (IOException e) {
-    e.printStackTrace();
-    System.out.println("File not found! :(");
-}
-double endTime4 = System.currentTimeMillis();
-if (((endTime4 - startTime4)) > maxTime) {
-    maxTime = (endTime4 - startTime4);
-    slowMethod = "CreateFileWithSortedDictionary() Method";
-}
-if (((endTime4 - startTime4)) < minTime) {
-    minTime = (endTime4 - startTime4);
-    fastMethod = "CreateFileWithSortedDictionary() Method";
-}
+          } catch (IOException e) {
+              e.printStackTrace();
+              System.out.println("File not found! :(");
+          }
+          double endTime4 = System.currentTimeMillis();
+          if (((endTime4 - startTime4)) > maxTime) {
+              maxTime = (endTime4 - startTime4);
+              slowMethod = "CreateFileWithSortedDictionary() Method";
+          }
+          if (((endTime4 - startTime4)) < minTime) {
+              minTime = (endTime4 - startTime4);
+              fastMethod = "CreateFileWithSortedDictionary() Method";
+          }
 ``` 
    -  _Objects.requireNonNull(dictionary)_: means that, as the dictionary may return a "null", this specifies not to be null
-   - _ResourcesPath_: Applying the 5th principle, it is a new variable which holds path + "/Resources" 
+   - _ResourcesPath_: Applying the 5<sup>th</sup> principle, it is a new variable which holds path + "/Resources" 
 
 ##### ExecuteTestMode(String ResourcesPath)
 We divided the code in this method into three different methods: one for introducing, one for test 1 and another for test 2 code:
@@ -376,52 +376,52 @@ We divided the code in this method into three different methods: one for introdu
 ###### **1. InitializingTestMode()**
 We include:
 ```java
-System.out.println("________________________________________________________________________________________\n");
-System.out.println("TESTS:");
+         System.out.println("________________________________________________________________________\n");
+         System.out.println("TESTS:");
 ```
-   - Applying the 7th principle, we eliminated lines of code that we weren´t using. So instead of using ```System.out.println()```(so we could include a white space, we changed add to a using line of code ```/n```.
+   - Applying the 7<sup>th</sup> principle, we eliminated lines of code that we weren´t using. So instead of using ```System.out.println()```(so we could include a white space, we changed add to a using line of code ```/n```.
 
 ###### **2. Test1(File correct_file, File to_check_file)**
 ```java 
-System.out.println("Test #1");
-System.out.println("   ...checking the 10,000 words, word by word...");
-Scanner scan_correct = new Scanner(correct_file);
-Scanner scan_to_check = new Scanner(to_check_file);
+         System.out.println("Test #1");
+         System.out.println("   ...checking the 10,000 words, word by word...");
+         Scanner scan_correct = new Scanner(correct_file);
+         Scanner scan_to_check = new Scanner(to_check_file);
 
-int word_index = 0;
-while (scan_correct.hasNext()){
-    word_index ++;
-    String correct = scan_correct.next();
-    String to_check = scan_to_check.next();
-    if (!correct.equals(to_check)){
-        System.out.println("   The file has an error, line "+ word_index + " : " + correct + " != " + to_check);
-    }
-}
+         int word_index = 0;
+         while (scan_correct.hasNext()){
+             word_index ++;
+             String correct = scan_correct.next();
+             String to_check = scan_to_check.next();
+             if (!correct.equals(to_check)){
+                 System.out.println("   The file has an error, line "+ word_index + " : " + correct + " != " + to_check);
+             }
+         }
 
-if(scan_to_check.hasNext()) System.out.println("   The files are of different lengths");
-else System.out.println("   Test 1 done succesfully");
-scan_correct.close();
-scan_to_check.close();
+         if(scan_to_check.hasNext()) System.out.println("   The files are of different lengths");
+         else System.out.println("   Test 1 done succesfully");
+         scan_correct.close();
+         scan_to_check.close();
 ```
 ###### **3. Test2(File correct_file, File to_check_file)**
 ```java
-System.out.println("\nTest #2: Check 5 random positions");
-Scanner scan_correct2 = new Scanner(correct_file);
-Scanner scan_to_check2 = new Scanner(to_check_file);
+         System.out.println("\nTest #2: Check 5 random positions");
+         Scanner scan_correct2 = new Scanner(correct_file);
+         Scanner scan_to_check2 = new Scanner(to_check_file);
 
-LinkedList<String> testing = new LinkedList<>();
-LinkedList<String> correct = new LinkedList<>();
+         LinkedList<String> testing = new LinkedList<>();
+         LinkedList<String> correct = new LinkedList<>();
 
-while(scan_correct2.hasNext()){
-    correct.add(scan_correct2.next());
-    testing.add(scan_to_check2.next());
-}
-Random random = new Random();
-for(int i=0; i<5; i++){
-    int index = random.nextInt(10000);
-    System.out.println( "  -  " +index + " --> Correct: " + correct.get(index) + " | Test: " + testing.get(index));
-}
-System.out.println("___________________________________________________________________________________________\n");
+         while(scan_correct2.hasNext()){
+             correct.add(scan_correct2.next());
+             testing.add(scan_to_check2.next());
+         }
+         Random random = new Random();
+         for(int i=0; i<5; i++){
+             int index = random.nextInt(10000);
+             System.out.println( "  -  " +index + " --> Correct: " + correct.get(index) + " | Test: " + testing.get(index));
+         }
+         System.out.println("___________________________________________________________________________________________\n");
 ```
 
 #### Avoid Redundant Commenting
@@ -456,29 +456,32 @@ Instead of using a normal while loop, we used a foreach loop for two particular 
  ###### 1.
  -  Before:
  ```java 
- ListIterator<String> iterator = list_words.listIterator();
-                 while(iterator.hasNext()){
-                     String element = iterator.next();
-                     dict_ordered.write(element + "\n");
-                 }  
+          ListIterator<String> iterator = list_words.listIterator();
+          while(iterator.hasNext()){
+              String element = iterator.next();
+              dict_ordered.write(element + "\n");
+          }  
  ```
    -  After
  ```java
- for (String element : (Iterable<String>) list_words) {
-                     dict_ordered.write(element + "\n");
-                 }
+          for (String element : (Iterable<String>) list_words) {
+              dict_ordered.write(element + "\n");
+          }
  ```
  ###### 2. 
  -  Before:
  ```java
- for (int i = 0; i < args.length; i++)
+          for (int i = 0; i < args.length; i++)
  ```
  -  After:
  ```java
- if (arg.equals("-1")) ExecuteTestMode(ResourcesPath);
+          if (arg.equals("-1")) ExecuteTestMode(ResourcesPath);
  ```
  
  In fact, the execution time for the whole program has decreased almost 1 second.
 
 #### YAGNI (You Ain't Gonna Need It)
 As mentioned in the "keeping functions small" principle, instead of inserting a whole ```System.out.println``` completely blank for created a white line, we removed those lines of code and insert a ´´´/n´´´ in the ```System.out.println```s.  However, before making the last commit, we made sure not to keep lines of code that we were not using
+
+
+Copyright © 2019 by Clara Dubois and Clara Benzadon, IE University.
