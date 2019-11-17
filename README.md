@@ -283,6 +283,9 @@ In addition, having placed this timers, we noticed that in several iterators, th
         iterator.add(s);
 ```                          
 ### 5. Coding principles
+
+By applying the Coding Principles we are aiming to transform our code into a high quality, easy to interpret and easy to follow code. 
+
 #### 5. 1 Meaningful Names
 | Before | After |
 | :---: | :-----------: |
