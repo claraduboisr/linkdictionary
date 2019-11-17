@@ -283,7 +283,7 @@ In addition, having placed this timers, we noticed that in several iterators, th
         iterator.add(s);
 ```                          
 ### 5. Coding principles
-#### Meaningful Names
+#### 5. 1 Meaningful Names
 | Before | After |
 | :---: | :-----------: |
 | ```insert()``` | ```SortAndInsertInLinkdictionary``` |
