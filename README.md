@@ -47,7 +47,7 @@ File file = new File(file_dict_path);
 
 2. Read the file
 ```java
-Scanner scan = new Scanner (file);
+Scanner scan = new Scanner (file); 
 
 while (scan.hasNextLine()) {
   String s = scan.nextLine();
@@ -371,7 +371,7 @@ On order to keep functions small we carried out different changes in the differe
    - _ResourcesPath_: Applying the 5<sup>th</sup> principle, it is a new variable which holds path + "/Resources" 
 
 ##### ExecuteTestMode(String ResourcesPath)
-We divided the code in this method into three different methods: one for introducing, one for test 1 and another for test 2 code:
+As to make the method more simple and easily understandable we splited the code within the method into three different ones: one for initializing the test mode, one for running test 1 and a third one for running test 2 code:
 
 ###### **1. InitializingTestMode()**
 We include:
@@ -425,8 +425,8 @@ We include:
 ```
 
 #### Avoid Redundant Commenting
-In the last commit, we had up to 31 lines of commenting. Right now we have just **6 lines**.
-We decided to remove these lines of commenting because, having changed the method's names and declaring a more self-explanatory variables's names, it made it clearer the purpose of the code and the comments were redundant information. 
+In our last commit, there were up to 31 lines of commenting. Right now we have just **6 lines**.
+By renaming the methods there was no need on keeping as many comments as before, given that the method's new names are now self-explanatory making perfectly clear the purpose of the code to follow. 
 
 #### Single Responsibility Principle
 | Entity | Description |
