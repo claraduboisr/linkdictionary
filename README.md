@@ -293,8 +293,8 @@ In addition, having placed this timers, we noticed that in several iterators, th
 
 On the other hand, we considered that proper naming and proper declaration of the varibales, that is why ```double maxTime = 0``` (and similar variables) where changed to private.
 
-#### Keep Functions Small
-Different changes in the different methods:
+#### 5. 2 Keep Functions Small
+On order to keep functions small we carried out different changes in the different methods:
 
 ##### Main()
 ###### **1.	PrintIntroduction()**
