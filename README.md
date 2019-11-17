@@ -484,7 +484,8 @@ Instead of using a normal while loop, we used a foreach loop for two particular 
  In fact, the execution time for the whole program has decreased almost 1 second.
 
 #### 5.7 YAGNI (You Ain't Gonna Need It)
-As mentioned in the "keeping functions small" principle, instead of inserting a whole ```System.out.println``` completely blank for created a white line, we removed those lines of code and insert a ´´´/n´´´ in the ```System.out.println```s.  However, before making the last commit, we made sure not to keep lines of code that we were not using
+As mentioned in the "keeping functions small" principle, instead of inserting a whole ```System.out.println``` completely blank for created a white line, we removed those lines of code and insert a ```/n``` in the ```System.out.println```s.  However, before making the last commit, we made sure not to keep lines of code that we were not using
+
 
 
 Copyright © 2019 by Clara Dubois and Clara Benzadon, IE University.
