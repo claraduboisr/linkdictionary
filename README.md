@@ -424,11 +424,11 @@ We include:
          System.out.println("___________________________________________________________________________________________\n");
 ```
 
-#### Avoid Redundant Commenting
+#### 5.3 Avoid Redundant Commenting
 In our last commit, there were up to 31 lines of commenting. Right now we have just **6 lines**.
 By renaming the methods there was no need on keeping as many comments as before, given that the method's new names are now self-explanatory making perfectly clear the purpose of the code to follow. 
 
-#### Single Responsibility Principle
+#### 5.4 Single Responsibility Principle
 | Entity | Description |
 | --- | ----------- |
 | ```Main``` class | Declares the initial time for the methods|
@@ -444,14 +444,14 @@ By renaming the methods there was no need on keeping as many comments as before,
 | ```Test2()``` | Execution of test 2 |
 | ```PrintSpeedMethod()``` | Prints the fastest and slowest method |
 
-#### Don't Repeat Yourself
+#### 5.5 Don't Repeat Yourself
 String ResourcesPath = path + "/Resources"; insted of writing all the time path + "/Resources"
   -  Also, for a few methods, this made us change the variables that the methods needed: from path to ResourcesPath
 
 On the other hand, we were already using constants variables: 
   -  ```int size = 26```which was used for declaring the size for the LinkedList dictionary. We decided to use it since the beginning because for the spanish alphabet we would need 27 and it would be inefficient to change everywhere we declared that size.
 
-#### Keep Your Code Simple
+#### 5.6 Keep Your Code Simple
 Instead of using a normal while loop, we used a foreach loop for two particular cases: 
  ###### 1.
  -  Before:
@@ -480,7 +480,7 @@ Instead of using a normal while loop, we used a foreach loop for two particular 
  
  In fact, the execution time for the whole program has decreased almost 1 second.
 
-#### YAGNI (You Ain't Gonna Need It)
+#### 5.7 YAGNI (You Ain't Gonna Need It)
 As mentioned in the "keeping functions small" principle, instead of inserting a whole ```System.out.println``` completely blank for created a white line, we removed those lines of code and insert a ´´´/n´´´ in the ```System.out.println```s.  However, before making the last commit, we made sure not to keep lines of code that we were not using
 
 
